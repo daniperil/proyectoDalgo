@@ -1,125 +1,179 @@
 package proyecto;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
-//Autora: Vilma Tirado Gómez
+
 public class ProblemaB {
 
-	static int count = 0; 
 
-	public void DFS(int grafo[][], boolean marcados[], 
-			int n, int vert, int ini, int v) { 
+	static int X = 0;
+	static int Y = 0;
 
-		// marca el vertice como visitado 
-		marcados[vert] = true; 
-
-		// si encuentro el camino 
-		if (n == 0) { 
-
-			// desmarca el vertice 
-			marcados[vert] = false; 
-
-			// Revisa que termine donde empezo 
-			if (grafo[vert][ini] == 1) { 
-				count++; 
-				return; 
-			} else
-				return; 
-		} 
-
-		// Busca cada camino posible (k-1)
-		for (int i = 0; i < v; i++) 
-			if (!marcados[i] && grafo[vert][i] == 1) 
-
-				// DFS 
-				DFS(grafo, marcados, n-1, i, ini,v); 
-
-		// Desmarca el vertice  
-		marcados[vert] = false; 
-	} 
-
-	// Cuenta los ciclos. 
-	public  int contarCircuitos(int grafo[][], int k, int v) { 
-
-		// Array de vertices  
-		boolean marked[] = new boolean[v]; 
+	public static void main(String[] args) throws Exception {
+		ProblemaB instancia = new ProblemaB();
+		try ( 
+				InputStreamReader is= new InputStreamReader(System.in);
+				BufferedReader br = new BufferedReader(is);
+				) { 
 
 
-		for (int i = 0; i < v - (k - 1); i++) { 
-			DFS(grafo, marked, k-1, i, i,v); 
+			//			final String FILENAME = "C:\\Users\\Daniel\\Documents\\Proyecto\\proyectoDalgo\\src\\proyecto\\DatosEntradaProblemaB.txt";
+			//			BufferedReader br1 = new BufferedReader(new FileReader(FILENAME));
 
-			// marca vertices 
-			marked[i] = true; 
-		} 
-
-		return count / 2;  
-	} 
-	
-	
-
-	public static void main(String[] args) { 
-		
-		try {
-			InputStreamReader is= new InputStreamReader(System.in);
-			BufferedReader br = new BufferedReader(is); 
-
-			//valores iniciales del grafo
-			
 			String line = br.readLine();
-			String [] in = line.split(" ");
-			int n=Integer.parseInt(in[0]);
-			int k= Integer.parseInt(in[1]);
-			
-			while(n!=0&&k!=0)
+
+			ArrayList<int []> csArray = new ArrayList<int []>();
+			System.out.println("Entra While");
+
+
+			while(!"0".equals(line)) 
 			{
-				analizar(n,k,br);
-				count=0;
+				final String [] dataStr = line.split(" ");
+				final int[] numeros = Arrays.stream(dataStr).mapToInt(f->Integer.parseInt(f)).toArray();
+				//				for (int i : numeros) 
+				//				{
+				//					System.out.println(i);
+				//				}
+				csArray.add(numeros);
 				line = br.readLine();
-				in = line.split(" ");
-				n=Integer.parseInt(in[0]);
-				k= Integer.parseInt(in[1]);
 
 			}
-			
 
+			int[][] respuesta = instancia.construccionMatriz(csArray);
 
-		} 
-		catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
+			int solucion = encontrarSub(respuesta);
+			System.out.println(solucion);
+			//			br1.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-
-
-	public static void analizar(int n, int k ,BufferedReader br)
+	public int[][] construccionMatriz(ArrayList<int []> entrada)
 	{
-		try {
-		int grafo[][]= new int[n][n];
-		String line = br.readLine();
-		String [] dataStr = line.split(" ");
-			for(int i=1; i<=n ; i++) {
-				
-				dataStr = line.split(" ");
-				for (int j=1; j<dataStr.length; j++)
+		System.out.println("Entra a método");
+		int N = 0;
+		int M = 0;
+
+		int[][] respuesta = null;
+
+		for (int i = 0; i < entrada.size(); i++) {
+			if(i==0)
+			{
+				N = entrada.get(i)[0];
+				M = entrada.get(i)[1];
+				if(N ==0 && M==0)
 				{
-					//Valor de la columna 
-					int c= Integer.parseInt(dataStr[j]);
-					grafo[i-1][c-1]=1;
-					grafo[c-1][i-1]=1;
+					break;
 				}
-				if(i!=n)
+//				System.out.println(N);
+//				System.out.println(M);
+				respuesta = new int[N][M];
+				X = entrada.get(i)[2];
+				Y = entrada.get(i)[3];
+//				System.out.println(X);
+//				System.out.println(Y);
+			}
+			if(i!=0) 
+			{
+				for (int j = 0; j < M; j++) 
 				{
-					line = br.readLine();	
+					respuesta[i-1][j]= entrada.get(i)[j];
 				}
 			}
-			ProblemaB instancia = new ProblemaB();
-			int respuesta = instancia.contarCircuitos(grafo,k,n);
-			System.out.println(respuesta);
+
+		}
+
+		return respuesta;
+	}
+
+
+	public static int encontrarSub(int[][] respuesta) 
+	{
+		int resp = 0;
+		int Px1 = 0;
+		int Px2 = 0;
+		int Py1= 0;
+		int Py2 = 0;
 		
-		} catch (Exception e) {
-			// TODO: handle exception
+		if(respuesta[respuesta.length-1][respuesta[0].length-1] < X)
+		{
+			System.out.println(resp);
+			return resp;
+		}
+		if(respuesta[0][0]>Y)
+		{
+			System.out.println(resp);
+			return resp;
+		}
+		else {
+			System.out.println("Entra");
+			
+			int max = 0;
+
+				for (int i = 0; i < respuesta.length; i++) 
+				{
+					for (int j = 0; j < respuesta[0].length; j++) {
+						if(respuesta[i][j] >= X)
+						{
+							Px1 = i;
+							Py1= j;
+							System.out.println(Px1);
+							System.out.println(Py1);
+							System.out.println(respuesta[0][3]);
+							System.out.println(X);
+							while(i<respuesta.length || j<respuesta[0].length)
+							{
+								if(respuesta[i][j] > Y)
+								{
+									
+									Px2 = i-1;
+									Py2= j-1;
+									System.out.println("Entra if");
+									System.out.println(Px2-Px1);
+									System.out.println(Py2-Py1);
+									if((Px2-Px1)==(Py2-Py1))
+									{
+										max = (Px2-Px1)+1;
+										if(max > resp)
+										{
+											resp = max;
+										}
+										return resp;
+									}
+								}
+								i++;
+								j++;
+							}
+							
+						}
+					}	
+				}
+
+//		outerloopbackwards:
+//			for (int i = respuesta.length-1; i == 0; i--) 
+//			{
+//				for (int j = respuesta[0].length-1; j ==0; j--) {
+//					if(respuesta[i][j] <= Y)
+//					{
+//						Px2 = i;
+//						Py2= j;
+//						break outerloopbackwards;
+//					}
+//				}	
+//			}
+//				
+//				if((Px2-Px1)==(Py2-Py1))
+//				{
+//					resp = (Px2-Px1);
+//				}
+
+				return resp;
 		}
 	}
-}
+
+} 

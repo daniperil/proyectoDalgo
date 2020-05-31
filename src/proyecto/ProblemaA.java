@@ -1,6 +1,7 @@
 package proyecto;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ProblemaA {
@@ -56,7 +57,7 @@ public class ProblemaA {
 		}
 
 
-		for (int i = 0; i < 9999; i++) 
+		for (int i = 0; i < Integer.MAX_VALUE; i++) 
 		{
 
 			x = N*i;
@@ -114,5 +115,6 @@ public class ProblemaA {
 
 		return resp;
 	}
+
 
 }
