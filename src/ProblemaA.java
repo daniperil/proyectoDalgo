@@ -50,7 +50,14 @@ public class ProblemaA {
 			return resp;
 		}
 
-		if(N==5 && d!=5)
+		if(N%5==0 && d!=5)
+		{
+			resp = "*";
+//			System.out.println("Entra5");
+			return resp;
+		}
+		
+		if(N%10==0)
 		{
 			resp = "*";
 //			System.out.println("Entra5");
