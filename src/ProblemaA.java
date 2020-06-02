@@ -1,4 +1,5 @@
-package proyecto;
+//package proyecto;
+//Autores Camilo Salinas y Daniel Perilla
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class ProblemaA {
 				final String [] dataStr = line.split(" ");
 				final int[] numeros = Arrays.stream(dataStr).mapToInt(f->Integer.parseInt(f)).toArray();
 				String respuesta = instancia.reDigit(numeros);
-				System.out.println(Arrays.toString(numeros));
+//				System.out.println(Arrays.toString(numeros));
 				System.out.println(respuesta);
 				line = br.readLine();
 			}
@@ -34,8 +35,8 @@ public class ProblemaA {
 		int d = nyd[1];
 		int x;
 
-		System.out.println(""+N+"");
-		System.out.println(""+d+"");
+//		System.out.println(""+N+"");
+//		System.out.println(""+d+"");
 
 		if(N==0 & d==0)
 		{
@@ -45,14 +46,14 @@ public class ProblemaA {
 		if(N%2==0 && d%2!=0)
 		{
 			resp = "*";
-			System.out.println("EntraPar");
+//			System.out.println("EntraPar");
 			return resp;
 		}
 
 		if(N==5 && d!=5)
 		{
 			resp = "*";
-			System.out.println("Entra5");
+//			System.out.println("Entra5");
 			return resp;
 		}
 
@@ -105,7 +106,7 @@ public class ProblemaA {
 						if(contador1==temp.length())
 						{
 							resp = Integer.toString(contador1);
-							System.out.println("Entra existe respuesta");
+//							System.out.println("Entra existe respuesta");
 						}
 					}
 			}

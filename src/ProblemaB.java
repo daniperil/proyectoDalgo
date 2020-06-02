@@ -1,5 +1,5 @@
-package proyecto;
 
+//Autores Camilo Salinas y Daniel Perilla
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -26,7 +26,7 @@ public class ProblemaB {
 			String line = br.readLine();
 
 			ArrayList<int []> csArray = new ArrayList<int []>();
-			System.out.println("Entra While");
+//			System.out.println("Entra While");
 
 
 			while(!"0".equals(line)) 
@@ -55,7 +55,7 @@ public class ProblemaB {
 
 	public int[][] construccionMatriz(ArrayList<int []> entrada)
 	{
-		System.out.println("Entra a método");
+//		System.out.println("Entra a método");
 		int N = 0;
 		int M = 0;
 
@@ -78,7 +78,7 @@ public class ProblemaB {
 //				System.out.println(X);
 //				System.out.println(Y);
 			}
-			if(i!=0) 
+			else 
 			{
 				for (int j = 0; j < M; j++) 
 				{
@@ -102,16 +102,16 @@ public class ProblemaB {
 		
 		if(respuesta[respuesta.length-1][respuesta[0].length-1] < X)
 		{
-			System.out.println(resp);
+//			System.out.println(resp);
 			return resp;
 		}
 		if(respuesta[0][0]>Y)
 		{
-			System.out.println(resp);
+//			System.out.println(resp);
 			return resp;
 		}
 		else {
-			System.out.println("Entra");
+//			System.out.println("Entra");
 			
 			int max = 0;
 
@@ -122,10 +122,10 @@ public class ProblemaB {
 						{
 							Px1 = i;
 							Py1= j;
-							System.out.println(Px1);
-							System.out.println(Py1);
-							System.out.println(respuesta[0][3]);
-							System.out.println(X);
+//							System.out.println(Px1);
+//							System.out.println(Py1);
+//							System.out.println(respuesta[0][3]);
+//							System.out.println(X);
 							while(i<respuesta.length || j<respuesta[0].length)
 							{
 								if(respuesta[i][j] > Y)
@@ -133,9 +133,9 @@ public class ProblemaB {
 									
 									Px2 = i-1;
 									Py2= j-1;
-									System.out.println("Entra if");
-									System.out.println(Px2-Px1);
-									System.out.println(Py2-Py1);
+//									System.out.println("Entra if");
+//									System.out.println(Px2-Px1);
+//									System.out.println(Py2-Py1);
 									if((Px2-Px1)==(Py2-Py1))
 									{
 										max = (Px2-Px1)+1;
